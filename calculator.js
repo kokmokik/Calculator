@@ -1,6 +1,14 @@
+const numbtns = document.querySelectorAll(".numbers");
+const screen = document.querySelector(".result");
+const delbtn = document.querySelector(".del");
+const opbtns = document.querySelectorAll(".operator");
+const eqalbtn = document.querySelector(".eqalbtn");
+let ScreenValue = "";
 let int1;
 let int2;
 let operator;
+let currentOP;
+let outcome;
 
 //adds 2 numbers 
 function add(a,b){
@@ -19,13 +27,17 @@ function mult(a,b){
 
 //divides 2 numbers 
 function divide(a,b){
-          return a / b
+          if(b === 0){
+                    return "nope"
+          }
+          else {
+                    return a/b
+          }
 }
 
 //picks one of the functions above 
 //console sytax example : operate(5,"+",5)
 function operate(int1,operator,int2){
- let outcome;
  if(operator === "+"){
            outcome = add(int1,int2)
  }
@@ -38,13 +50,9 @@ function operate(int1,operator,int2){
  else if(operator === "/"){
           outcome = divide(int1,int2)
  }
- return outcome
 }
 
-const numbtns = document.querySelectorAll(".numbers");
-const screen = document.querySelector(".result");
-let ScreenValue = "";
-
+//populates the screen whenever a number button is pressed 
 numbtns.forEach((numbtn) => {
  numbtn.addEventListener("click",() =>{
    let currentVal = ScreenValue;
@@ -53,3 +61,38 @@ numbtns.forEach((numbtn) => {
  })
 });
 
+//refreshes the screen COMPLETLY (screen value gets deletet too)
+ function refresh_screen(){
+  ScreenValue = "";
+  screen.textContent = "";
+ }
+ delbtn.addEventListener("click",refresh_screen);
+
+opbtns.forEach((opbtn)=> {
+ opbtn.addEventListener("click",()=>{
+   ScreenValue = ScreenValue + opbtn.id;
+   currentOP = opbtn.id;
+   let arr1 = ScreenValue.split(currentOP);
+   if(arr1.length > 2){
+          screen.textContent = ""
+          ScreenValue = "";
+   }
+   else{
+   screen.textContent = ScreenValue;
+   }
+ });
+});
+
+//converts the string in to three values and passes them into the operate function and displays the outcome 
+function Eqalbutton(){
+let arr = ScreenValue.split(currentOP);
+int1 = Number(arr[0]);
+int2 = Number(arr[1]);
+operator = currentOP;
+operate(int1,operator,int2);
+screen.textContent = outcome;
+ScreenValue = "";
+};
+
+
+eqalbtn.addEventListener("click",Eqalbutton);
