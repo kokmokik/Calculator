@@ -15,14 +15,26 @@ justify-content: center;
 background-color: dimgray;
 }
 .result {
- width: 400px;
- height: 100px;
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 0;
+  justify-content: end;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+ width: 380px;
+ height: 80px;
  background-color: cadetblue;
  border-width: 1px;
  color: white;
  font-size: 32px;
  margin-bottom: 10px;
  border-radius: 10px;
+ font-family: monospace;
+ font-size: 40px;
+ padding-top: 20px;
 }
 
 .operators{

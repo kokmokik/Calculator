@@ -41,5 +41,15 @@ function operate(int1,operator,int2){
  return outcome
 }
 
+const numbtns = document.querySelectorAll(".numbers");
+const screen = document.querySelector(".result");
+let ScreenValue = "";
 
+numbtns.forEach((numbtn) => {
+ numbtn.addEventListener("click",() =>{
+   let currentVal = ScreenValue;
+   ScreenValue = currentVal + numbtn.id;
+   screen.textContent = ScreenValue;
+ })
+});
 
